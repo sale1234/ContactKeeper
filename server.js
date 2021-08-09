@@ -1,7 +1,11 @@
 const express = require('express')
 const app = express()
+const connectDB = require('./config/db')
 
 app.get('/', (req, res) => res.json({ msg: 'Welcome to my app' }))
+
+// Connect DB
+connectDB()
 
 // Define users
 app.use('/api/users', require('./routes/users'))
