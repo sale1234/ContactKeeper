@@ -7,6 +7,9 @@ app.get('/', (req, res) => res.json({ msg: 'Welcome to my app' }))
 // Connect DB
 connectDB()
 
+// Init middleware
+app.use(express.json({ extended: false }))
+
 // Define users
 app.use('/api/users', require('./routes/users'))
 app.use('/api/auth', require('./routes/auth'))
