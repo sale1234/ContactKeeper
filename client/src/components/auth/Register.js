@@ -1,30 +1,32 @@
 import React, { useState, useContext, useEffect } from 'react'
-// import AlertContext from '../../context/alert/alertContext'
-// import AuthContext from '../../context/auth/authContext'
+import AlertContext from '../../context/alert/alertContext'
+import AuthContext from '../../context/auth/authContext'
 
 const Register = (props) => {
-  // const alertContext = useContext(AlertContext)
-  // const authContext = useContext(AuthContext)
+  const alertContext = useContext(AlertContext)
+  const authContext = useContext(AuthContext)
 
-  // const { setAlert } = alertContext
-  // const { register, error, clearErrors, isAuthenticated } = authContext
+  const { setAlert } = alertContext
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     props.history.push('/')
-  //   }
+  const { register, error, clearErrors, isAuthenticated } = authContext
 
-  //   if (error === 'User already exists') {
-  //     setAlert(error, 'danger')
-  //     clearErrors()
-  //   }
-  //   // eslint-disable-next-line
-  // }, [error, isAuthenticated, props.history])
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/')
+    }
+
+    if (error === 'User already exists') {
+      setAlert(error, 'danger')
+      clearErrors()
+    }
+    // eslint-disable-next-line
+  }, [error])
 
   const [user, setUser] = useState({
     name: '',
     email: '',
     password: '',
+    // pass conformation
     password2: '',
   })
 
@@ -34,17 +36,17 @@ const Register = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    // if (name === '' || email === '' || password === '') {
-    //   setAlert('Please enter all fields', 'danger')
-    // } else if (password !== password2) {
-    //   setAlert('Passwords do not match', 'danger')
-    // } else {
-    //   register({
-    //     name,
-    //     email,
-    //     password,
-    //   })
-    // }
+    if (name === '' || email === '' || password === '') {
+      setAlert('Please enter all fields', 'danger')
+    } else if (password !== password2) {
+      setAlert('Passwords do not match', 'danger')
+    } else {
+      register({
+        name,
+        email,
+        password,
+      })
+    }
   }
 
   return (
